@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Bidding
+
+@admin.register(Bidding)
+class BiddingAdmin(admin.ModelAdmin):
+    list_display = ('number','modality', 'year','approval_date', 'value')
+    search_fields = ('number',)
