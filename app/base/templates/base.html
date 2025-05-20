@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-DQvkBjpPgn7RC31MCQoOeC9TI2kdqa4+BSgNMNj8v77fdC77Kj5zpWFTJaaAoMbC" crossorigin="anonymous">
+        <!-- Static CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- CSS do Select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        {% block css %}{% endblock css %}
+    </head>
+    <body>
+      {% include "components/_header.html" %}
+
+      <div class="container-fluid">
+
+        {% include "components/_sidebar.html" %}
+
+        <div class="col py-3">
+
+          <div class="container mat-4">
+            <main>
+              {% block content %}{% endblock content %}
+            </main>
+          </div>
+        </div>
+
+      </div>
+
+        <!-- Bootstrap, popper e jquery JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.4/dist/js/bootstrap.min.js" integrity="sha384-Re460s1NeyAhufAM5JwfIGWosokaQ7CH15ti6W5Y4wC/m4eJ5opJ2ivohxVM05Wd" crossorigin="anonymous"></script>
+        <!-- jQuery (necessário para o Select2) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- JS do Select2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- JS do chart js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Static JavaScript -->
+        {% block js %} {% endblock js %}
+
+    </body>
+</html>
