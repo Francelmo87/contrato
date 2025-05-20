@@ -14,4 +14,4 @@ class Bidding(TimeStampedModel):
         ordering = ['number']
     
     def __str__(self):
-        return f"{self.modality} {self.number}/{self.year}"
+        return f"{self.number}/{self.year}"
