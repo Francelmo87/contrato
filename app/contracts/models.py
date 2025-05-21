@@ -15,13 +15,14 @@ class Contract(TimeStampedModel):
     assignature_data = models.DateField('data da assinatura')
     start_date = models.DateField('data inicial')
     end_date = models.DateField('data final')
+    value = models.DecimalField('valor total', max_digits=11, decimal_places=2 , default=0)
 
     def __str__(self):
         return f"Contrato {self.number} - {self.supplier.name}"
 
     @property
-    def vigencia(self):
-        return f"{self.start_date} a {self.end_date}"
+    def formatted_value(self):
+        return f"R$ {self.value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 # Itens do contrato
 class ContractItem(models.Model):
