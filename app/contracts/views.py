@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from . models import Contract
 
@@ -14,3 +14,7 @@ class ContractListView(ListView):
         if search:
             queryset = queryset.filter(name__icontains=search)
         return queryset
+
+class ContractDetailView(DetailView):
+    model = Contract
+    template_name = 'contract_detail.html'
