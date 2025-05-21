@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 from app.base.models import TimeStampedModel
 
@@ -23,6 +24,13 @@ class Contract(TimeStampedModel):
     @property
     def formatted_value(self):
         return f"R$ {self.value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+    @property
+    def expire(self):
+        today = date.today()
+        days_remainning = (self.end_date - today).days
+        return days_remainning
+    
 
 # Itens do contrato
 class ContractItem(models.Model):
