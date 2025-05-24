@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class EntriesConfig(AppConfig):
+class InflowsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app.entries'
+    name = 'inflows'

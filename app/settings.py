@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'app.suppliers',
     'app.biddings',
     'app.contracts',
-    'app.entries',
+    'app.inflows',
     'app.requisitions',
     'app.dispatches',
 ]
