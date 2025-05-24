@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <a href="{% url 'contracts:contract_list' %} " class="btn btn-outline-warning">
+    <i class="bi bi-arrow-left"></i> Voltar
+  </a>
+  <h3 class="display-4">Cadastrar Contrato</h3>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary float-end">Salvar Contrato</button>
+      </form>
+    </div>
+  </div>
+    
+{% endblock %}
