@@ -11,12 +11,12 @@ from app.suppliers.models import Supplier
 class Contract(TimeStampedModel):
     bidding = models.ForeignKey(Bidding, on_delete=models.SET_NULL, null=True, blank=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    number = models.CharField('número',max_length=50)
-    target = models.TextField('objeto')
-    assignature_data = models.DateField('data da assinatura')
-    start_date = models.DateField('data inicial')
-    end_date = models.DateField('data final')
-    value = models.DecimalField('valor total', max_digits=11, decimal_places=2 , default=0)
+    number = models.CharField('Número', max_length=20)
+    target = models.TextField('Objeto')
+    assignature_data = models.DateField('Data da assinatura')
+    start_date = models.DateField('Data inicial')
+    end_date = models.DateField('Data final')
+    value = models.DecimalField('Valor total', max_digits=15, decimal_places=2 , default=0)
 
     def __str__(self):
         return f"Contrato {self.number} - {self.supplier.name}"
@@ -33,16 +33,38 @@ class Contract(TimeStampedModel):
     
 
 # Itens do contrato
-class ContractItem(models.Model):
+class ItemContract(models.Model):
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='items')
-    description = models.TextField('especificação',)
-    unit = models.CharField('unidade',max_length=20)
-    quantity = models.PositiveIntegerField('quantidade')
-    unit_price = models.DecimalField('preço unitário',max_digits=10, decimal_places=2)
+    especification = models.TextField('Especificação',)
+    unit = models.CharField('Unidade',max_length=20)
+    quantity = models.PositiveIntegerField('Quantidade')
+    unit_price = models.DecimalField('Preço unitário', max_digits=15, decimal_places=2)
 
     def __str__(self):
-        return f"{self.description} ({self.contract.number})"
+        return f"{self.especification} ({self.contract.number})"
+    
+    @property
+    def formatted_unit_price(self):
+        return f"R$ {self.unit_price:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
     @property
     def total_value(self):
-        return self.quantity * self.unit_price
+        value = self.quantity * self.unit_price
+        return f"R$ {value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+   
+    
+# Adito do Contrato
+class Amendment(TimeStampedModel):
+    contract = models.ForeignKey(Contract, related_name='amendments', on_delete=models.CASCADE)
+    type = models.CharField('Tipo', max_length=20, choices=[('prorrogacao', 'Prorrogação'), ('financeiro', 'Financeiro'), ('misto', 'Misto')])
+    motivation = models.TextField('Motivação')
+    new_end_date = models.DateField('Nova data final',blank=True, null=True)
+    new_value = models.DecimalField('Valor novo', max_digits=15, decimal_places=2, default=0)
+
+#Aditivo dos itens do contrato
+class ItemAmendment(models.Model):
+    aditivo = models.ForeignKey(Amendment, related_name='itens_new', on_delete=models.CASCADE)
+    especification = models.TextField('Especificação')
+    quantity = models.PositiveIntegerField('Quantidade')
+    unit = models.CharField('Unidade',max_length=20)
+    unit_price = models.DecimalField(max_digits=12, decimal_places=2)

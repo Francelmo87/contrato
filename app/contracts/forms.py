@@ -23,7 +23,7 @@ class ContractForm(forms.ModelForm):
             'supplier': 'Fornecedor',
             'number': 'Número',
             'target': 'Objeto',
-            # 'assignature_data': 'Data da Assinatura',
+            'assignature_data': 'Data da Assinatura',
             'start_date': 'Data Inicial',
             'end_date': 'Data Final',
             'value': 'Valor Total',
