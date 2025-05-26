@@ -20,7 +20,7 @@ Solicitações
 
   <h2>Lista de Requisições
     <span class="float-end">
-      <a href="{ url 'requisitions:requisition_create' %}">
+      <a href="{% url 'requisitions:requisition_create' %}">
         <button type="button" class="btn btn-primary">
           <span class="bi bi-plus"></span> Adicionar
         </button>
@@ -47,7 +47,7 @@ Solicitações
             </a>
           </td>
           <td>{{ requisition.requested_by }}</td>
-          <td>{{ requisition.aproved }}</td>
+          <td>{{ requisition.approved }}</td>
           <td>
             <a href="{ url 'requisitions:requisition_detail' requisition.id %}" class="btn btn-info btn-sm">
               <i class="bi bi-eye"></i>
