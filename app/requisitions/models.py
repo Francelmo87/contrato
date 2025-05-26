@@ -1,17 +1,29 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from app.contracts.models import ItemContract
+from app.base.models import TimeStampedModel
 
-# Solicitação de item
-class ItemRequest(models.Model):
-    item = models.ForeignKey(ItemContract, on_delete=models.CASCADE)
-    requested_quantity = models.PositiveIntegerField()
-    requested_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='requests')
-    request_date = models.DateField(auto_now_add=True)
-    approved = models.BooleanField(default=False)
-    approved_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='approvals')
-    approval_date = models.DateField(null=True, blank=True)
+from app.contracts.models import Contract, ItemContract
+
+
+class Requisition(TimeStampedModel):
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
+    requested_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='requisitions')
+    
+    approved = models.BooleanField('Aprovado',default=False)
+    approved_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='approved_requisitions')
+    approval_date = models.DateTimeField('Data da aproivação',null=True, blank=True)
 
     def __str__(self):
-        return f"Solicitação {self.id} - {self.item.description}"
+        return self.contract.number    
+
+
+# Solicitação de item
+class ItemRequesition(models.Model):
+    requisition = models.ForeignKey(Requisition, on_delete=models.CASCADE, related_name='itens_requisition')
+    contract_item = models.ForeignKey(ItemContract, on_delete=models.PROTECT)
+    quantity = models.PositiveIntegerField('Quantidade')
+    
+
+    def __str__(self):
+        return f"{self.quantity} x {self.contract_item.especification}"
