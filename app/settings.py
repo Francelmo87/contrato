@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'app.biddings',
     'app.contracts',
     'app.requisitions',
-    # 'app.dispatches',
+    'app.dispatches',
 ]
 
 MIDDLEWARE = [
