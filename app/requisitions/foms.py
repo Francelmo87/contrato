@@ -7,7 +7,6 @@ class RequisitionForm(forms.ModelForm):
     class Meta:
         model = Requisition
         fields = ['contract', 'requested_by', ]
-        exclude = ['approved']
         widgets = {
             'contract': forms.Select(attrs={'class': 'form-control'}),
             'requested_by': forms.Select(attrs={'class': 'form-control'}),
@@ -31,11 +30,11 @@ class ItemRequisitionForm(forms.ModelForm):
             'quantity': 'Quantidade',
         }
 
-        def clean_quantity(self):
-            quantity = self.cleaned_data.get('quantity')
-            if quantity <= 0:
-                raise forms.ValidationError("Quantidade deve ser maior que zero")
-            return quantity
+    def clean_quantity(self):
+        quantity = self.cleaned_data.get('quantity')
+        if quantity <= 0:
+            raise forms.ValidationError("Quantidade deve ser maior que zero")
+        return quantity
 
        
 

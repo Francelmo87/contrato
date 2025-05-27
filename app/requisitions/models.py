@@ -10,10 +10,6 @@ class Requisition(TimeStampedModel):
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
     requested_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='requisitions')
     
-    approved = models.BooleanField('Aprovado',default=False)
-    approved_by = models.ForeignKey(User, null=True, blank=True, on_delete=models.PROTECT, related_name='approved_requisitions')
-    approval_date = models.DateTimeField('Data da aproivação',null=True, blank=True)
-
     def __str__(self):
         return self.contract.number    
 

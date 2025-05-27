@@ -35,21 +35,19 @@ Solicitações
         <tr>
           <th class="text-center">Contratos</th>
           <th class="text-center">Responsável</th>
-          <th class="text-center">Aprovado</th>
         </tr>
       </thead>
       <tbody>
         {% for requisition in requisitions %}
         <tr>
           <td>
-            <a href="{ url 'requisitions:requisition_detail' requisition.id %}" class="text-primary fw-semibold">
+            <a href="{% url 'requisitions:requisition_detail' requisition.id %}" class="text-primary fw-semibold">
               {{ requisition.contract }}
             </a>
           </td>
           <td>{{ requisition.requested_by }}</td>
-          <td>{{ requisition.approved }}</td>
           <td>
-            <a href="{ url 'requisitions:requisition_detail' requisition.id %}" class="btn btn-info btn-sm">
+            <a href="{% url 'requisitions:requisition_detail' requisition.id %}" class="btn btn-info btn-sm">
               <i class="bi bi-eye"></i>
             </a>
           </td>
