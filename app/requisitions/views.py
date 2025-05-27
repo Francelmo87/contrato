@@ -1,9 +1,9 @@
+from django.utils import timezone
+from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
 from .foms import ItemRequisitionFormSet, RequisitionForm
-
-
 from .models import Requisition
 
 
@@ -36,3 +36,8 @@ class RequisitionCreateView(CreateView):
             formset.save()  
             return super().form_valid(form)
         return self.render_to_response(self.get_context_data(form=form))
+
+
+class RequisitionDetailView(DetailView):
+    model = Requisition
+    template_name = 'requisition_detail.html'
