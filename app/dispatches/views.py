@@ -18,7 +18,7 @@ class PendingRequisitionListView(ListView):
 class RequisitionApprovalView(FormView):
     template_name = 'approve_requisition.html'
     form_class = RequisitionApprovalForm
-    success_url = reverse_lazy('dispatches:pending_list')
+    success_url = reverse_lazy('dispatches:movement_list')
 
     def dispatch(self, request, *args, **kwargs):
         self.requisition = get_object_or_404(Requisition, pk=kwargs['pk'])
@@ -47,3 +47,8 @@ class RequisitionApprovalView(FormView):
         context = super().get_context_data(**kwargs)
         context['requisition'] = self.requisition
         return context
+
+class MovimentListView(ListView):
+    model = Movement
+    template_name = 'movement_list.html'
+    context_object_name = 'movements'
