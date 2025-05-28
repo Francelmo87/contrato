@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<a href="{% url 'dispatches:pending_list' %} " class="btn btn-outline-warning">
+  <i class="bi bi-arrow-left"></i> Voltar
+</a>
+
+<h1>Confimar a entrega dos itens</h1>
+
+<div class="row">
+  <div class="col-sm-9">
+    <table class="table table-user-information">
+      <tbody>
+        <tr>
+          <th>Contrato:</th>
+          <td>{{ requisition.contract }}</td>
+        </tr>
+        <tr>
+          <th>Fiscal:</th>
+          <td>{{ requisition.requested_by }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Itens:</h4>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">Especificação</th>
+          <th class="text-center">Unidade</th>
+          <th class="text-center">Quantidade</th>
+          <th class="text-center">Preço Unitário</th>
+          <th class="text-center">Total</th>
+        </tr>
+      </thead>
+      <body>
+        {% for item in requisition.itens_requisition.all %}
+        {% comment %} {% for item in contract.items.all %} {% endcomment %}
+          <tr>
+            <td>{{ item.contract_item.especification }}</td>
+            <td class="text-center">{{ item.contract_item.unit }}</td>
+            <td class="text-center">{{ item.quantity }}</td>
+            <td class="text-center">{{ item.contract_item.formatted_unit_price }}</td>
+            <td class="text-center">
+              {% widthratio item.quantity 1 item.contract_item.unit_price as total %}
+              R$ {{ total|floatformat:2 }}
+            </td>
+          </tr>
+        {% endfor %}
+      </body>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Trigger -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#approveModal">
+  Confirmar Entrega
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="approveModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmação</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Tem certeza que deseja Confimar?</p>
+          {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success">Confirmar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
