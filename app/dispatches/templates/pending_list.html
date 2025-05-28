@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Requisições Pendentes</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Contrato</th>
+            <th>Responsável</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for req in pending_requisitions %}
+        <tr>
+            <td>{{ req.contract }}</td>
+            <td>{{ req.requested_by }}</td>
+            <td>
+                <a href="{% url 'dispatches:approve_requisition' req.id %}" class="btn btn-success btn-sm">Aprovar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Nenhuma pendente.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
