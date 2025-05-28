@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Movimentações de Contratos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Requisição</th>
+            <th>Movido por</th>
+            <th>Data</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movement in movements %}
+        <tr>
+            <td>{{ movement.requisition }}</td>
+            <td>{{ movement.moved_by }}</td>
+            <td>{{ movement.moved_at }}</td>
+            <td>{{ movement.description }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhuma movimentação registrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
