@@ -13,27 +13,43 @@
     <table class="table table-user-information">
       <tbody>
         <tr>
-          <th class="text-right">Objeto</th>
+          <th class="text-right">Objeto: </th>
           <td>{{ object.target }}</td>
         </tr>
         <tr>
-          <th class="text-right">Licitação de origem </th>
+          <th class="text-right">Licitação de origem:</th>
           <td>{{ object.bidding }}</td>
         </tr>
         <tr>
-          <th class="text-right">Data da assinatura</th>
+          <th class="text-right">Gestor: </th>
+          <td>{{ object.manager }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Gestor Substituto: </th>
+          <td>{{ object.manager_substitute }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Fiscal: </th>
+          <td>{{ object.inspector }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Fiscal Substituto: </th>
+          <td>{{ object.inspector_substitute }}</td>
+        </tr>
+        <tr>
+          <th class="text-right">Data da assinatura: </th>
           <td>{{ object.assignature_data }}</td>
         </tr>
         <tr>
-          <th class="text-right">Data de Incio</th>
+          <th class="text-right">Data de Início: </th>
           <td>{{ object.start_date }}</td>
         </tr>
         <tr>
-          <th class="text-right">Data do Fim</th>
+          <th class="text-right">Data do Fim: </th>
           <td>{{ object.end_date }}</td>
         </tr>
         <tr>
-          <th class="text-right">Valor Total</th>
+          <th class="text-right">Valor Total: </th>
           <td>{{ object.formatted_value }}</td>
         </tr>
       </tbody>

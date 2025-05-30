@@ -33,8 +33,10 @@ Contratos
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th class="text-center">Objeto</th>
           <th class="text-center">Número</th>
+          <th class="text-center">Objeto</th>
+          <th class="text-center">Gestor</th>
+          <th class="text-center">Fiscal</th>
           <th class="text-center">Vigência</th>
           <th class="text-center">Valor</th>
           <th class="text-center">Ação</th>
@@ -49,6 +51,8 @@ Contratos
             </a>
           </td>
           <td>{{ contract.target }}</td>
+          <td>{{ contract.manager }}</td>
+          <td>{{ contract.inspector }}</td>
           <td>{{ contract.expire }} dias</td>
           <td>{{ contract.formatted_value }}</td>
           <td>
