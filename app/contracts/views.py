@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from . models import Contract
-from . forms import ContractForm
+from .forms import ContractForm, ItemContractFormSet
+from .models import Contract
 
 class ContractListView(ListView):
     model= Contract
@@ -24,6 +24,24 @@ class ContractDetailView(DetailView):
 
 class ContractCreateView(CreateView):
     model = Contract
-    template_name = 'contract_create.html'
     form_class = ContractForm
-    success_url = reverse_lazy('contract_list')
+    template_name = 'contract_create.html'
+    success_url = reverse_lazy('contracts:contract_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['formset'] = ItemContractFormSet(self.request.POST)
+        else:
+            context['formset'] = ItemContractFormSet()
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()  
+            return super().form_valid(form)
+        return self.render_to_response(self.get_context_data(form=form))
