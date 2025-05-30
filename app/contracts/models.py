@@ -12,12 +12,6 @@ from app.suppliers.models import Supplier
 class Contract(TimeStampedModel):
     bidding = models.ForeignKey(Bidding, on_delete=models.SET_NULL, null=True, blank=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    
-    manager = models.ForeignKey(User, on_delete=models.PROTECT, related_name='manager_contracts')
-    manager_substitute = models.ForeignKey(User, on_delete=models.PROTECT, related_name='manager_sustitute_contracts')
-    inspector = models.ForeignKey(User, on_delete=models.PROTECT, related_name='inspector_contracts')
-    inspector_substitute = models.ForeignKey(User, on_delete=models.PROTECT, related_name='inspector_substitute_contracts')
-
     number = models.CharField('Número', max_length=20)
     target = models.TextField('Objeto')
     assignature_data = models.DateField('Data da assinatura')
@@ -97,3 +91,19 @@ class ItemAmendment(models.Model):
     quantity = models.PositiveIntegerField('Quantidade')
     unit = models.CharField('Unidade',max_length=20)
     unit_price = models.DecimalField(max_digits=12, decimal_places=2)
+
+
+class ContractUserRole(models.Model):
+    ROLE_CHOICES = [
+        ('manager', 'Gestor'),
+        ('manager_substitute', 'Suplente do Gestor'),
+        ('inspector', 'Fiscal'),
+        ('inspector_substitute', 'Suplente do Fiscal'),
+    ]
+    
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='user_roles')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES)
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.get_role_display()} ({self.contract.number})"

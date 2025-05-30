@@ -8,10 +8,6 @@ class ContractForm(forms.ModelForm):
         model = Contract
         fields = ['bidding', 
                   'supplier', 
-                  'manager', 
-                  'manager_substitute', 
-                  'inspector', 
-                  'inspector_substitute', 
                   'number', 
                   'target', 
                   'assignature_data', 
@@ -22,10 +18,6 @@ class ContractForm(forms.ModelForm):
         widgets = {
             'bidding': forms.Select(attrs={'class': 'form-control'}),
             'supplier': forms.Select(attrs={'class': 'form-control'}),
-            'manager': forms.Select(attrs={'class': 'form-control'}),
-            'manager_substitute': forms.Select(attrs={'class': 'form-control'}),
-            'inspector': forms.Select(attrs={'class': 'form-control'}),
-            'inspector_substitute': forms.Select(attrs={'class': 'form-control'}),
             'number': forms.TextInput(attrs={'class': 'form-control'}),
             'target': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'assignature_data': forms.DateInput(format='%Y-%m-%d', attrs={'class': 'form-control', 'type':'date'}),
@@ -36,10 +28,6 @@ class ContractForm(forms.ModelForm):
         labels = {
             'bidding': 'Licitação',
             'supplier': 'Fornecedor',
-            'manager': 'Gestor',
-            'manager_substitute': 'Gestor Substituto',
-            'inspector': 'Fiscal',
-            'inspector_substitute': 'Fiscal Substituto',
             'number': 'Número',
             'target': 'Objeto',
             'assignature_data': 'Data da Assinatura',
