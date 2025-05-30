@@ -13,6 +13,8 @@ class Supplier(TimeStampedModel):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'Fornecedores'
+            
     
     def __str__(self):
         return self.name

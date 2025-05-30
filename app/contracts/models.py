@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth.models import User
 
 from app.base.models import TimeStampedModel
 
@@ -11,12 +12,22 @@ from app.suppliers.models import Supplier
 class Contract(TimeStampedModel):
     bidding = models.ForeignKey(Bidding, on_delete=models.SET_NULL, null=True, blank=True)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    
+    manager = models.ForeignKey(User, on_delete=models.PROTECT, related_name='manager_contracts')
+    manager_substitute = models.ForeignKey(User, on_delete=models.PROTECT, related_name='manager_sustitute_contracts')
+    inspector = models.ForeignKey(User, on_delete=models.PROTECT, related_name='inspector_contracts')
+    inspector_substitute = models.ForeignKey(User, on_delete=models.PROTECT, related_name='inspector_substitute_contracts')
+
     number = models.CharField('Número', max_length=20)
     target = models.TextField('Objeto')
     assignature_data = models.DateField('Data da assinatura')
     start_date = models.DateField('Data inicial')
     end_date = models.DateField('Data final')
     value = models.DecimalField('Valor total', max_digits=15, decimal_places=2 , default=0)
+
+    class Meta:
+        ordering = ('number',)
+        verbose_name_plural = 'Contratos'
 
     def __str__(self):
         return f"Contrato {self.number} - {self.supplier.name}"
@@ -31,6 +42,24 @@ class Contract(TimeStampedModel):
         days_remainning = (self.end_date - today).days
         return days_remainning
     
+
+    def get_queryset(self):
+        user = self.request.user
+        
+        # Se admin (superuser ou grupo 'Administradores') vê tudo
+        if user.is_superuser or user.groups.filter(name='Administrator').exists():
+            return Contract.objects.all()
+
+        # Se gestor ou suplente de gestor
+        if user.groups.filter(name__in=['manager', 'manager_substitute']).exists():
+            return Contract.objects.filter(models.Q(manager=user) | models.Q(manager_substitute=user))
+
+        # Se fiscal ou suplente de fiscal
+        if user.groups.filter(name__in=['inspector', 'inspector_substitute']).exists():
+            return Contract.objects.filter(models.Q(inspector=user) | models.Q(inspector_substitute=user))
+
+        # Outros → não vê nada
+        return Contract.objects.none()
 
 # Itens do contrato
 class ItemContract(models.Model):

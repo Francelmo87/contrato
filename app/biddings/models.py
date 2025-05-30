@@ -12,6 +12,7 @@ class Bidding(TimeStampedModel):
 
     class Meta:
         ordering = ['number']
+        verbose_name_plural = 'Licitações'
     
     def __str__(self):
         return f"{self.number}/{self.year}"
