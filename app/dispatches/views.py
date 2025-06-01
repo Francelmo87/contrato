@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, FormView
 from django.shortcuts import get_object_or_404, redirect
@@ -6,7 +7,7 @@ from django.contrib import messages
 from .models import Requisition, Movement
 from .forms import RequisitionApprovalForm
 
-class PendingRequisitionListView(ListView):
+class PendingRequisitionListView(LoginRequiredMixin, ListView):
     model = Requisition
     template_name = 'pending_list.html'
     context_object_name = 'pending_requisitions'
@@ -15,7 +16,7 @@ class PendingRequisitionListView(ListView):
         return Requisition.objects.filter(approvals__isnull=True)
 
 
-class RequisitionApprovalView(FormView):
+class RequisitionApprovalView(LoginRequiredMixin, FormView):
     template_name = 'approve_requisition.html'
     form_class = RequisitionApprovalForm
     success_url = reverse_lazy('dispatches:movement_list')
@@ -48,7 +49,7 @@ class RequisitionApprovalView(FormView):
         context['requisition'] = self.requisition
         return context
 
-class MovimentListView(ListView):
+class MovimentListView(LoginRequiredMixin, ListView):
     model = Movement
     template_name = 'movement_list.html'
     context_object_name = 'movements'

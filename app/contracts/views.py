@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import ContractForm, ItemContractFormSet
 from .models import Contract
 
-class ContractListView(ListView):
+class ContractListView(LoginRequiredMixin, ListView):
     model= Contract
     template_name = 'contract_list.html'
     context_object_name = 'contracts'
@@ -17,12 +18,12 @@ class ContractListView(ListView):
         return queryset
 
 
-class ContractDetailView(DetailView):
+class ContractDetailView(LoginRequiredMixin, DetailView):
     model = Contract
     template_name = 'contract_detail.html'
 
 
-class ContractCreateView(CreateView):
+class ContractCreateView(LoginRequiredMixin, CreateView):
     model = Contract
     form_class = ContractForm
     template_name = 'contract_create.html'

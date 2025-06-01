@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
@@ -5,13 +6,13 @@ from .foms import RequisitionForm, ItemRequisitionFormSet
 from .models import Requisition
 
 
-class RequisitionListView(ListView):
+class RequisitionListView(LoginRequiredMixin, ListView):
     model = Requisition
     template_name = 'requisition_list.html'
     context_object_name = 'requisitions'
 
 
-class RequisitionCreateView(CreateView):
+class RequisitionCreateView(LoginRequiredMixin, CreateView):
     model = Requisition
     form_class = RequisitionForm
     template_name = 'requisition_create.html'
@@ -36,6 +37,6 @@ class RequisitionCreateView(CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class RequisitionDetailView(DetailView):
+class RequisitionDetailView(LoginRequiredMixin, DetailView):
     model = Requisition
     template_name = 'requisition_detail.html'
