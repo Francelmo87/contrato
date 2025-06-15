@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 from app.base.models import TimeStampedModel
@@ -8,7 +8,7 @@ from app.contracts.models import Contract, ItemContract
 
 class Requisition(TimeStampedModel):
     contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
-    requested_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name='requisitions')
+    requested_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='requisitions')
     
     def __str__(self):
         return self.contract.number    

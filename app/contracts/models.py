@@ -1,17 +1,20 @@
 from django.db import models
 from datetime import date
-from django.contrib.auth.models import User
 
 from app.base.models import TimeStampedModel
 
 from app.biddings.models import Bidding
 from app.suppliers.models import Supplier
 
+from django.conf import settings
+
 
 # Contrato
 class Contract(TimeStampedModel):
-    bidding = models.ForeignKey(Bidding, on_delete=models.SET_NULL, null=True, blank=True)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    bidding = models.ForeignKey(Bidding, on_delete=models.SET_NULL, null=True, blank=True, related_name='biddings', verbose_name='Licitação')
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, blank=True, related_name='suppliers', verbose_name='Fornecedor')
+    manager = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='managers', verbose_name='Gestor')
+    inspector = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='inspectors', verbose_name='Fiscal')
     number = models.CharField('Número', max_length=20)
     target = models.TextField('Objeto')
     assignature_data = models.DateField('Data da assinatura')
@@ -36,24 +39,6 @@ class Contract(TimeStampedModel):
         days_remainning = (self.end_date - today).days
         return days_remainning
     
-
-    def get_queryset(self):
-        user = self.request.user
-        
-        # Se admin (superuser ou grupo 'Administradores') vê tudo
-        if user.is_superuser or user.groups.filter(name='Administrator').exists():
-            return Contract.objects.all()
-
-        # Se gestor ou suplente de gestor
-        if user.groups.filter(name__in=['manager', 'manager_substitute']).exists():
-            return Contract.objects.filter(models.Q(manager=user) | models.Q(manager_substitute=user))
-
-        # Se fiscal ou suplente de fiscal
-        if user.groups.filter(name__in=['inspector', 'inspector_substitute']).exists():
-            return Contract.objects.filter(models.Q(inspector=user) | models.Q(inspector_substitute=user))
-
-        # Outros → não vê nada
-        return Contract.objects.none()
 
 # Itens do contrato
 class ItemContract(models.Model):
@@ -91,19 +76,3 @@ class ItemAmendment(models.Model):
     quantity = models.PositiveIntegerField('Quantidade')
     unit = models.CharField('Unidade',max_length=20)
     unit_price = models.DecimalField(max_digits=12, decimal_places=2)
-
-
-class ContractUserRole(models.Model):
-    ROLE_CHOICES = [
-        ('manager', 'Gestor'),
-        ('manager_substitute', 'Suplente do Gestor'),
-        ('inspector', 'Fiscal'),
-        ('inspector_substitute', 'Suplente do Fiscal'),
-    ]
-    
-    contract = models.ForeignKey(Contract, on_delete=models.CASCADE, related_name='user_roles')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=30, choices=ROLE_CHOICES)
-    
-    def __str__(self):
-        return f"{self.user.username} - {self.get_role_display()} ({self.contract.number})"
