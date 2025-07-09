@@ -63,4 +63,17 @@ python manage.py runserver
 ## Projeto
 
 - login
-![image](https://github.com/user-attachments/assets/24b13708-0a20-4ec1-b34f-4c43489bbae8) digite o seu usuario criado com suoperuser
+![image](https://github.com/user-attachments/assets/24b13708-0a20-4ec1-b34f-4c43489bbae8) digite o seu usuário criado com superuser
+
+- Tela iniicial
+![image](https://github.com/user-attachments/assets/e6d5e701-e10d-4486-b65b-d2f8c150605b)
+
+- área do admin
+![image](https://github.com/user-attachments/assets/d8741aa4-1035-4806-ad33-d81541077dde) Tela da área administrativa
+![image](https://github.com/user-attachments/assets/983a5d0b-a736-42fb-a146-125b22dbbf26) Adiciona a licitção
+![image](https://github.com/user-attachments/assets/f433c379-6976-4709-838f-57733a5641b8) Adiciona o fornecedor
+
+
+
+
+
