@@ -20,23 +20,25 @@ evitando situações emergenciais.
  ## Características
 
 Requisitos funcionais
-* Cadastro de contratos, licitação, fornecedores, solicitação de itens do contrato e confirmação de chegada dos itens
-    * Filtros de contratos
-    * Cálculo automático da quantidade disponível no contrato para cada item do contrato
-    * Sistema de login para usuários do sistema – Administrador, Gestor, Fiscal
-    * Controle de permissões de usuários e/ou grupo, com diferentes níveis de acesso
-     ** Administrador – Cadastros geral (tudo)
-     ** Gestor – Solicita os itens do contrato que ele é responsável
-     ** Fiscal – Confirma se os itens chegaram dos quais ele seja responsável
-     ** suporte a futuras integrações/ automações
 
-  Requisitos não funcionais
-    * Segurança
-    * Desempenho	
-    * Escalabilidade
-    * Usabilidade
-    * Mantenabilidade
-    * Responsividade
+* Cadastro de contratos, licitação, fornecedores, solicitação de itens do contrato e confirmação de chegada dos itens
+* Filtros de contratos
+* Cálculo automático da quantidade disponível no contrato para cada item do contrato
+* Sistema de login para usuários do sistema – Administrador, Gestor, Fiscal
+* Controle de permissões de usuários e/ou grupo, com diferentes níveis de acesso
+ * Administrador – Cadastros geral (tudo)
+ * Gestor – Solicita os itens do contrato que ele é responsável
+ * Fiscal – Confirma se os itens chegaram dos quais ele seja responsável
+ * suporte a futuras integrações/ automações
+
+Requisitos não funcionais
+
+* Segurança
+* Desempenho	
+* Escalabilidade
+* Usabilidade
+* Mantenabilidade
+* Responsividade
  
  
  
