@@ -13,9 +13,9 @@ evitando situações emergenciais.
 
 ## Tecnologias
 
- Linguagem: python 3.13
- Framework: django 5.2
- Desenvolvimento: FullStack
+- Linguagem: python 3.13
+- Framework: django 5.2
+-  Desenvolvimento: FullStack
 
  ## Características
 
