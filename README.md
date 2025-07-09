@@ -40,7 +40,7 @@ Requisitos não funcionais
 * Mantenabilidade
 * Responsividade
 
-**Como rodar o projeto?
+Como rodar o projeto?
 - Clone esse repositório.
 - Crie um virtualenv com Python 3.
 - Ative o virtualenv.
@@ -57,4 +57,5 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
  ```
-** Modelo
+## Modelo
+![image](https://github.com/user-attachments/assets/b232351f-609f-4da0-934e-c27659bb5729)
