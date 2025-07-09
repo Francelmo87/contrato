@@ -59,3 +59,8 @@ python manage.py runserver
  ```
 ## Modelo
 ![image](https://github.com/user-attachments/assets/b232351f-609f-4da0-934e-c27659bb5729)
+
+## Projeto
+
+- login
+![image](https://github.com/user-attachments/assets/24b13708-0a20-4ec1-b34f-4c43489bbae8) digite o seu usuario criado com suoperuser
