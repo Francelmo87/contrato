@@ -15,7 +15,7 @@ evitando situações emergenciais.
 
 - Linguagem: python 3.13
 - Framework: django 5.2
--  Desenvolvimento: FullStack
+- Desenvolvimento: FullStack
 
  ## Características
 
@@ -53,8 +53,8 @@ cd app
 python3 -m venv .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
-python contrib/env_gen.py
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
  ```
+** Modelo
