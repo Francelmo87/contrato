@@ -19,8 +19,8 @@ evitando situações emergenciais.
 
  ## Características
 
-  Requisitos funcionais
-    * Cadastro de contratos, licitação, fornecedores, solicitação de itens do contrato e confirmação de chegada dos itens
+Requisitos funcionais
+* Cadastro de contratos, licitação, fornecedores, solicitação de itens do contrato e confirmação de chegada dos itens
     * Filtros de contratos
     * Cálculo automático da quantidade disponível no contrato para cada item do contrato
     * Sistema de login para usuários do sistema – Administrador, Gestor, Fiscal
