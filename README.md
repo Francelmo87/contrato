@@ -1,21 +1,45 @@
 # Gestão de Contratos Públicos
 
-O objetivo deste projeto visa ter uma gestão de todos os contratos público de um órgão em um sistema web.
+Projeto Django para gestão completa de contratos públicos com histórico, permissões, filtros e relatórios.
 
-## Motivação
+👉 Link da aplicação rodando: **(adicione quando estiver deployado)**
+
+## 💡 Objetivo do sistema
 
 De acordo com a nova lei de licitações e contratos (Lei 14.133/22), deve haver uma clara distinção entre o 
 gestor de contrato e o fiscal do contrato com objetivo de evitar fraude e seguindo o princípio da segregação de funções.
 Este sistema faz uma clara distinção entre aquele que faz as solicitações(Gestor) e aquele que receber os itens e confima
-sua entrega (Fiscal). outra vantagem é que o orgão pode desgignar uma pessoa responsável para fazer a gestão de todos os 
+sua entrega (Fiscal). Outra vantagem é que o orgão pode desgignar uma pessoa responsável para fazer a gestão de todos os 
 contratos, como um supervisor de contratos, evitando faltas de bens e serviços, afin de solicitar licitações de forma planejada
 evitando situações emergenciais.
 
-## Tecnologias
+## Tecnologias usadas
 
-- Linguagem: python 3.13
-- Framework: django 5.2
-- Desenvolvimento: FullStack
+- python 3.13
+- Django 5.2
+- PostgreSQL
+- FullStack
+
+## Como rodar o projeto localmente? 
+
+- Clone esse repositório
+    git clone https://github.com/Francelmo87/contrato.git
+- Entre na pasta
+    cd app
+- Crie um virtualenv com Python 3 (use UV preferenciamente)
+    uv venv ou
+    python3 -m venv .venv
+- Ative o virtualenv.
+    source .venv/bin/activate 
+- Instale as dependências.
+    uv add ./requirements.txt ou
+    pip install -r requirements.txt
+- Rode as migrações.
+    python manage.py migrate
+- Crie um superusuário
+    python manage.py createsuperuser
+- Rode o projeto
+    python manage.py runserver
 
  ## Características
 
@@ -40,24 +64,8 @@ Requisitos não funcionais
 * Mantenabilidade
 * Responsividade
 
-Como rodar o projeto?
-- Clone esse repositório.
-- Crie um virtualenv com Python 3.
-- Ative o virtualenv.
-- Instale as dependências.
-- Rode as migrações.
 
-```
-git clone https://github.com/Francelmo87/contrato.git
-cd app
-python3 -m venv .venv
-source .venv/bin/activate 
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
- ```
-## Modelo
+## Modelagem do banco de dados
 ![image](https://github.com/user-attachments/assets/b232351f-609f-4da0-934e-c27659bb5729)
 
 ## Projeto (os Dados são fictícios)
