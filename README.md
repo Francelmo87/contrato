@@ -24,24 +24,24 @@ evitando situações emergenciais.
 
 ## Como rodar o projeto localmente? 
 
-- Clone esse repositório\
-* git clone https://github.com/Francelmo87/contrato.git
-- Entre na pasta\
-* cd app
+- Clone esse repositório
+> git clone https://github.com/Francelmo87/contrato.git
+- Entre na pasta
+> cd app
 - Crie um virtualenv com Python 3 (use UV preferenciamente)
-* uv venv ou
-* python3 -m venv .venv
+> uv venv ou
+> python3 -m venv .venv
 - Ative o virtualenv.
-* source .venv/bin/activate 
+> source .venv/bin/activate 
 - Instale as dependências.
-* uv add -r ./requirements.txt ou
-* pip install -r requirements.txt
+> uv add -r ./requirements.txt ou
+> pip install -r requirements.txt
 - Rode as migrações.
-* python manage.py migrate
+> python manage.py migrate
 - Crie um superusuário
-* python manage.py createsuperuser
+> python manage.py createsuperuser
 - Rode o projeto
-*python manage.py runserver
+> python manage.py runserver
 
  ## Características
 
