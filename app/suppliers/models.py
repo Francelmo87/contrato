@@ -4,10 +4,10 @@ from app.base.models import TimeStampedModel
 
 # Fornecedor
 class Supplier(TimeStampedModel):
-    name = models.CharField('empresa', max_length = 200, null=True, blank=True)
-    cnpj = models.CharField('cnpj', max_length = 17, null=True, blank=True)
+    name = models.CharField('empresa', max_length = 200)
+    cnpj = models.CharField('cnpj', max_length = 17)
     representative = models.CharField('representante', max_length = 200, null=True, blank=True)
-    phone = models.CharField('contato', max_length = 15,)
+    phone = models.CharField('contato', max_length = 15, null=True, blank=True)
     rg = models.CharField('rg', max_length = 13, null=True, blank=True)
     cpf = models.CharField('cpf', max_length = 11, null=True, blank=True)
 
